@@ -17,11 +17,13 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
+    configuration: 'Release'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: false
     projects: '**/*.csproj'
+    configuration: 'Release'
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
