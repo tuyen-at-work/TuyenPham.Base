@@ -7,26 +7,20 @@ namespace TuyenPham.Base.Extensions
 {
     public static class XmlExtensions
     {
-        public static void Save(this XmlDocument xDoc, string filePath, Encoding encoding)
-        {
-            var settings = new XmlWriterSettings
-            {
-                Indent = true,
-                IndentChars = "  ",
-                NewLineChars = "\r\n",
-                NewLineHandling = NewLineHandling.Replace,
-                Encoding = encoding
-            };
-
-            using var fs = File.Open(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read); using var writer = XmlWriter.Create(fs, settings);
-            xDoc.Save(writer);
-        }
-
-        public static string Beautify(
-            this XmlDocument doc,
+        public static void Save(
+            this XmlDocument xDoc,
+            string filePath,
             Encoding encoding)
         {
-            var sb = new StringBuilder();
+            using var fs = File.Open(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
+            xDoc.Save(fs, encoding);
+        }
+
+        public static void Save(
+            this XmlDocument doc,
+            Stream stream,
+            Encoding encoding)
+        {
             var settings = new XmlWriterSettings
             {
                 Indent = true,
@@ -36,10 +30,22 @@ namespace TuyenPham.Base.Extensions
                 Encoding = encoding
             };
 
-            using var writer = XmlWriter.Create(sb, settings);
+            using var writer = XmlWriter.Create(stream, settings);
             doc.Save(writer);
+        }
 
-            return sb.ToString();
+        public static byte[] GetBytes(this XmlDocument xDoc, Encoding encoding)
+        {
+            using var mm = new MemoryStream();
+            xDoc.Save(mm, encoding);
+            return mm.ToArray();
+        }
+
+        public static string GetString(this XmlDocument xDoc, Encoding encoding)
+        {
+            using var mm = new MemoryStream();
+            xDoc.Save(mm, encoding);
+            return encoding.GetString(mm.ToArray());
         }
 
         public static XmlElement CreateElement(this XmlDocument xDoc, string name)
@@ -47,7 +53,7 @@ namespace TuyenPham.Base.Extensions
             return xDoc.CreateNode(XmlNodeType.Element, name, xDoc.NamespaceURI) as XmlElement;
         }
 
-        public static XmlElement CreateElement(this XmlElement parent, string name)
+        public static XmlElement CreateElement(this XmlNode parent, string name)
         {
             var xDoc = parent.OwnerDocument;
 
@@ -59,7 +65,7 @@ namespace TuyenPham.Base.Extensions
             return node;
         }
 
-        public static XmlElement AppendTo(this XmlElement node, XmlElement parentNode)
+        public static XmlElement AppendTo(this XmlElement node, XmlNode parentNode)
         {
             parentNode.AppendChild(node);
             return node;
