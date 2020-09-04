@@ -53,7 +53,7 @@ namespace TuyenPham.Base.Helpers
             return xDoc.CreateNode(XmlNodeType.Element, name, xDoc.NamespaceURI) as XmlElement;
         }
 
-        public static XmlElement CreateElement(this XmlNode parent, string name)
+        public static XmlElement AddElement(this XmlNode parent, string name)
         {
             var xDoc = parent.OwnerDocument;
 
@@ -61,6 +61,7 @@ namespace TuyenPham.Base.Helpers
                 throw new ArgumentNullException(nameof(parent.OwnerDocument));
 
             var node = xDoc.CreateNode(XmlNodeType.Element, name, xDoc.NamespaceURI) as XmlElement;
+            parent.AppendChild(node!);
 
             return node;
         }
