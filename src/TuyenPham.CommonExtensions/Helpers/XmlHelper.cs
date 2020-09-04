@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace TuyenPham.Base.Helpers
 {
-    public static class XmlHelper
+    public static partial class XmlHelper
     {
         public static void Save(
             this XmlDocument xDoc,
