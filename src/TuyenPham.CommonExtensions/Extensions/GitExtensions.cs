@@ -1,6 +1,4 @@
-﻿using TuyenPham.CommonExtensions.Helpers;
-
-namespace TuyenPham.Base.Extensions
+﻿namespace TuyenPham.Base.Extensions
 {
     public static class GitExtensions
     {

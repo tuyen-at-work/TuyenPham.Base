@@ -11,7 +11,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace TuyenPham.CommonExtensions.Helpers
+namespace TuyenPham.Base.Extensions
 {
     public static class ProcessExtensions
     {
