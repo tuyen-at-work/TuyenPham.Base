@@ -13,9 +13,9 @@ namespace TuyenPham.Base.Helpers
             return new FileInfo(Path.Combine(di.FullName, path));
         }
 
-        public static DirectoryInfo GetFolder(this DirectoryInfo di, params string[] fileParts)
+        public static DirectoryInfo GetFolder(this DirectoryInfo di, params string[] folderParts)
         {
-            var path = fileParts.Aggregate(di.FullName, Path.Combine);
+            var path = folderParts.Aggregate(di.FullName, Path.Combine);
             return new DirectoryInfo(Path.Combine(di.FullName, path));
         }
 

@@ -1,14 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace TuyenPham.Base.Helpers
 {
     public static class StringHelper
     {
-        public static string Join(
-            this IEnumerable<string> args,
-            string separator = ", ")
+        public static bool InvariantCultureIgnoreCaseEquals(this string a, string b)
         {
-            return string.Join(separator, args);
+            return a?.Equals(b, StringComparison.InvariantCultureIgnoreCase) ?? b == null;
+        }
+
+        public static bool InvariantCultureEquals(this string a, string b)
+        {
+            return a?.Equals(b, StringComparison.InvariantCulture) ?? b == null;
+        }
+
+        public static bool OrdinalIgnoreCaseEquals(this string a, string b)
+        {
+            return a?.Equals(b, StringComparison.OrdinalIgnoreCase) ?? b == null;
+        }
+
+        public static bool OrdinalEquals(this string a, string b)
+        {
+            return a?.Equals(b, StringComparison.Ordinal) ?? b == null;
         }
     }
 }
