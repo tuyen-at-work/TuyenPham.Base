@@ -2,10 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TuyenPham.CommonExtensions.Helpers;
 
-namespace TuyenPham.CommonExtensions.Helpers
+namespace TuyenPham.Base.Extensions
 {
-    public static class IoHelper
+    public static class IoExtensions
     {
         public static FileInfo GetFile(this DirectoryInfo di, params string[] fileParts)
         {
@@ -27,15 +28,15 @@ namespace TuyenPham.CommonExtensions.Helpers
             if (deleteFirst)
                 await DeleteFolderAsync(destinationFolder);
 
-            ConsoleHelper.Yellow($"Copy '{sourceFolder}' to '{destinationFolder}'");
+            ConsoleExtensions.Yellow($"Copy '{sourceFolder}' to '{destinationFolder}'");
 
-            var result = ProcessHelper.RunAsync(
+            var result = ProcessExtensions.RunAsync(
                 "robocopy",
                 $@"""{sourceFolder}"" ""{destinationFolder}"" /e /NFL /NDL /NJH",
                 sourceFolder);
 
             if (result == 1)
-                ConsoleHelper.Green("Copied successfully.");
+                ConsoleExtensions.Green("Copied successfully.");
 
             else
                 throw new Exception($"Copy failed with code {result}.");
@@ -47,7 +48,7 @@ namespace TuyenPham.CommonExtensions.Helpers
         {
             do
             {
-                ConsoleHelper.Yellow($"Deleting '{folderPath}'...");
+                ConsoleExtensions.Yellow($"Deleting '{folderPath}'...");
 
                 try
                 {
@@ -55,14 +56,14 @@ namespace TuyenPham.CommonExtensions.Helpers
                 }
                 catch
                 {
-                    ConsoleHelper.Yellow(
+                    ConsoleExtensions.Yellow(
                         $"Can not delete '{folderPath}'. Press 'Enter' to try again or delete it manually then come back here.");
 
                     Console.ReadKey();
                 }
             } while (Directory.Exists(folderPath));
 
-            ConsoleHelper.Green("Deleted.");
+            ConsoleExtensions.Green("Deleted.");
 
             Console.WriteLine();
         }

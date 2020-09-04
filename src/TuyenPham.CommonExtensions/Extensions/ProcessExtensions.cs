@@ -13,7 +13,7 @@ using System.IO;
 
 namespace TuyenPham.CommonExtensions.Helpers
 {
-    public static class ProcessHelper
+    public static class ProcessExtensions
     {
         public static int RunAsync(
             string fileName,

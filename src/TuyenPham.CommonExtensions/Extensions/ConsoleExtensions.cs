@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TuyenPham.CommonExtensions.Interfaces;
+using TuyenPham.Base.Interfaces;
 
-namespace TuyenPham.CommonExtensions.Helpers
+namespace TuyenPham.Base.Extensions
 {
-    public static class ConsoleHelper
+    public static class ConsoleExtensions
     {
         public static T PromptSelectItem<T>(IList<T> items, string selectedItem, string question)
                where T : class, IHasName

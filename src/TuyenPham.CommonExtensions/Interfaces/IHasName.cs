@@ -1,4 +1,4 @@
-﻿namespace TuyenPham.CommonExtensions.Interfaces
+﻿namespace TuyenPham.Base.Interfaces
 {
     public interface IHasName
     {

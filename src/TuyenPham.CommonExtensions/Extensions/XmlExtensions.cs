@@ -1,12 +1,28 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace TuyenPham.CommonExtensions.Helpers
+namespace TuyenPham.Base.Extensions
 {
-    public static class XmlHelper
+    public static class XmlExtensions
     {
-        internal static string Beautify(
+        public static void Save(this XmlDocument xDoc, string filePath, Encoding encoding)
+        {
+            var settings = new XmlWriterSettings
+            {
+                Indent = true,
+                IndentChars = "  ",
+                NewLineChars = "\r\n",
+                NewLineHandling = NewLineHandling.Replace,
+                Encoding = encoding
+            };
+
+            using var fs = File.Open(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read); using var writer = XmlWriter.Create(fs, settings);
+            xDoc.Save(writer);
+        }
+
+        public static string Beautify(
             this XmlDocument doc,
             Encoding encoding)
         {
