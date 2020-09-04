@@ -5,21 +5,21 @@ using System.Threading.Tasks;
 
 namespace TuyenPham.CommonExtensions.Helpers
 {
-    internal static class IoHelper
+    public static class IoHelper
     {
-        internal static FileInfo GetFile(this DirectoryInfo di, params string[] fileParts)
+        public static FileInfo GetFile(this DirectoryInfo di, params string[] fileParts)
         {
             var path = fileParts.Aggregate(di.FullName, Path.Combine);
             return new FileInfo(Path.Combine(di.FullName, path));
         }
 
-        internal static DirectoryInfo GetFolder(this DirectoryInfo di, params string[] fileParts)
+        public static DirectoryInfo GetFolder(this DirectoryInfo di, params string[] fileParts)
         {
             var path = fileParts.Aggregate(di.FullName, Path.Combine);
             return new DirectoryInfo(Path.Combine(di.FullName, path));
         }
 
-        internal static async Task CopyDirectoryAsync(
+        public static async Task CopyDirectoryAsync(
             string sourceFolder,
             string destinationFolder,
             bool deleteFirst)
@@ -43,7 +43,7 @@ namespace TuyenPham.CommonExtensions.Helpers
             Console.WriteLine();
         }
 
-        internal static async Task DeleteFolderAsync(string folderPath)
+        public static async Task DeleteFolderAsync(string folderPath)
         {
             do
             {

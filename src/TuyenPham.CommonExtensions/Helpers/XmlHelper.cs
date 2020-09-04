@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace TuyenPham.CommonExtensions.Helpers
 {
-    internal static class XmlHelper
+    public static class XmlHelper
     {
         internal static string Beautify(
             this XmlDocument doc,
@@ -26,12 +26,12 @@ namespace TuyenPham.CommonExtensions.Helpers
             return sb.ToString();
         }
 
-        internal static XmlElement CreateElement(this XmlDocument xDoc, string name)
+        public static XmlElement CreateElement(this XmlDocument xDoc, string name)
         {
             return xDoc.CreateNode(XmlNodeType.Element, name, xDoc.NamespaceURI) as XmlElement;
         }
 
-        internal static XmlElement CreateElement(this XmlElement parent, string name)
+        public static XmlElement CreateElement(this XmlElement parent, string name)
         {
             var xDoc = parent.OwnerDocument;
 
@@ -43,13 +43,13 @@ namespace TuyenPham.CommonExtensions.Helpers
             return node;
         }
 
-        internal static XmlElement AppendTo(this XmlElement node, XmlElement parentNode)
+        public static XmlElement AppendTo(this XmlElement node, XmlElement parentNode)
         {
             parentNode.AppendChild(node);
             return node;
         }
 
-        internal static XmlElement SetElementAttribute(this XmlElement node, string name, string value)
+        public static XmlElement SetElementAttribute(this XmlElement node, string name, string value)
         {
             node.SetAttribute(name, value);
             return node;

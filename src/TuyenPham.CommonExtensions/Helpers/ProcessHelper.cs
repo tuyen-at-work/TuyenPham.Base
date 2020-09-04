@@ -13,9 +13,9 @@ using System.IO;
 
 namespace TuyenPham.CommonExtensions.Helpers
 {
-    internal static class ProcessHelper
+    public static class ProcessHelper
     {
-        internal static int RunAsync(
+        public static int RunAsync(
             string fileName,
             string command,
             string workingFolder)

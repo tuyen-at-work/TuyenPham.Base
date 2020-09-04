@@ -2,9 +2,9 @@
 
 namespace TuyenPham.CommonExtensions.Helpers
 {
-    internal static class StringHelper
+    public static class StringHelper
     {
-        internal static string Join(
+        public static string Join(
             this IEnumerable<string> args,
             string separator = ", ")
         {

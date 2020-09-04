@@ -5,9 +5,9 @@ using TuyenPham.CommonExtensions.Interfaces;
 
 namespace TuyenPham.CommonExtensions.Helpers
 {
-    internal static class ConsoleHelper
+    public static class ConsoleHelper
     {
-        internal static T PromptSelectItem<T>(IList<T> items, string selectedItem, string question)
+        public static T PromptSelectItem<T>(IList<T> items, string selectedItem, string question)
                where T : class, IHasName
         {
             T output = null;
@@ -53,17 +53,17 @@ namespace TuyenPham.CommonExtensions.Helpers
             return output;
         }
 
-        internal static void Yellow(object message, bool newLine = true)
+        public static void Yellow(object message, bool newLine = true)
         {
             Color(message, ConsoleColor.Yellow, newLine);
         }
 
-        internal static void Green(object message, bool newLine = true)
+        public static void Green(object message, bool newLine = true)
         {
             Color(message, ConsoleColor.Green, newLine);
         }
 
-        internal static void Red(object message, bool newLine = true)
+        public static void Red(object message, bool newLine = true)
         {
             Color(message, ConsoleColor.Red, newLine);
         }
