@@ -13,6 +13,7 @@ namespace TuyenPham.Base.Helpers
             XmlWriterSettings settings = null)
         {
             settings ??= new XmlWriterSettings();
+            settings.CloseOutput = true;
 
             using var writer = XmlWriter.Create(stream, settings);
             xDoc.Save(writer);

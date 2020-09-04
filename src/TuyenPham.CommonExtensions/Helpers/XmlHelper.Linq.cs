@@ -52,16 +52,35 @@ namespace TuyenPham.Base.Helpers
             return settings.Encoding.GetString(bytes);
         }
 
-        public static string GetString(
-            this XElement node,
+        public static void Save(
+            this XElement xElement,
+            Stream stream,
             XmlWriterSettings settings = null)
         {
             settings ??= new XmlWriterSettings();
 
-            using var stream = new MemoryStream();
             using var writer = XmlWriter.Create(stream, settings);
-            node.Save(writer);
-            return settings.Encoding.GetString(stream.ToArray());
+            xElement.Save(writer);
+        }
+
+        public static byte[] GetBytes(
+            this XElement xElement,
+            XmlWriterSettings settings = null)
+        {
+            using var mm = new MemoryStream();
+            xElement.Save(mm, settings);
+
+            return mm.ToArray();
+        }
+
+        public static string GetString(
+            this XElement xElement,
+            XmlWriterSettings settings = null)
+        {
+            settings ??= new XmlWriterSettings();
+
+            var bytes = xElement.GetBytes(settings);
+            return settings.Encoding.GetString(bytes);
         }
 
         public static XElement AddElement(this XElement parent, string name)
