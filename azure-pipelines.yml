@@ -10,24 +10,32 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
+  projects: '**/*.csproj'
+  projectToPublish: '**/TuyenPham.CommonExtensions.csproj'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: Restore NuGet packages
+  inputs:
+    command: 'restore'
+    projects: '$(projects)'
+    configuration: '$(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Build projects
   inputs:
     command: 'build'
-    projects: '**/*.csproj'
-    configuration: 'Release'
+    projects: '$(projects)'
+    configurationToPack: '$(buildConfiguration)'
 - task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/*.csproj'
-    configuration: 'Release'
-- task: NuGetCommand@2
+  displayName: Create NuGet package
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    configuration: '$(buildConfiguration)'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
+    packagesToPack: '$(projectToPublish)'
+    versioningScheme: 'off'
 - task: NuGetCommand@2
   inputs:
     command: 'push'
