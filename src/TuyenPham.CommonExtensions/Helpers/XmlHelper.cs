@@ -9,43 +9,47 @@ namespace TuyenPham.Base.Helpers
     {
         public static void Save(
             this XmlDocument xDoc,
-            string filePath,
-            Encoding encoding)
+            Stream stream,
+            XmlWriterSettings settings = null)
         {
-            using var fs = File.Open(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
-            xDoc.Save(fs, encoding);
+            settings ??= new XmlWriterSettings();
+
+            using var writer = XmlWriter.Create(stream, settings);
+            xDoc.Save(writer);
         }
 
         public static void Save(
-            this XmlDocument doc,
-            Stream stream,
-            Encoding encoding)
+            this XmlDocument xDoc,
+            string filePath,
+            XmlWriterSettings settings = null)
         {
-            var settings = new XmlWriterSettings
-            {
-                Indent = true,
-                IndentChars = "  ",
-                NewLineChars = "\r\n",
-                NewLineHandling = NewLineHandling.Replace,
-                Encoding = encoding
-            };
+            using var fs = File.Open(
+                filePath,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.Read);
 
-            using var writer = XmlWriter.Create(stream, settings);
-            doc.Save(writer);
+            xDoc.Save(fs, settings);
         }
 
-        public static byte[] GetBytes(this XmlDocument xDoc, Encoding encoding)
+        public static byte[] GetBytes(
+            this XmlDocument xDoc,
+            XmlWriterSettings settings = null)
         {
             using var mm = new MemoryStream();
-            xDoc.Save(mm, encoding);
+            xDoc.Save(mm, settings);
+
             return mm.ToArray();
         }
 
-        public static string GetString(this XmlDocument xDoc, Encoding encoding)
+        public static string GetString(
+            this XmlDocument xDoc,
+            XmlWriterSettings settings = null)
         {
-            using var mm = new MemoryStream();
-            xDoc.Save(mm, encoding);
-            return encoding.GetString(mm.ToArray());
+            settings ??= new XmlWriterSettings();
+
+            var bytes = xDoc.GetBytes(settings);
+            return settings.Encoding.GetString(bytes);
         }
 
         public static XmlElement CreateElement(this XmlDocument xDoc, string name)
@@ -66,13 +70,18 @@ namespace TuyenPham.Base.Helpers
             return node;
         }
 
-        public static XmlElement AppendTo(this XmlElement node, XmlNode parentNode)
+        public static XmlElement AppendTo(
+            this XmlElement node,
+            XmlNode parentNode)
         {
             parentNode.AppendChild(node);
             return node;
         }
 
-        public static XmlElement SetElementAttribute(this XmlElement node, string name, string value)
+        public static XmlElement SetElementAttribute
+            (this XmlElement node,
+            string name,
+            string value)
         {
             node.SetAttribute(name, value);
             return node;
