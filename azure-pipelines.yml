@@ -11,7 +11,7 @@ pool:
 
 variables:
   projects: '**/*.csproj'
-  projectToPublish: '**/TuyenPham.CommonExtensions.csproj'
+  projectToPublish: '**/TuyenPham.Base.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
