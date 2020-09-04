@@ -11,9 +11,9 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace TuyenPham.Base.Extensions
+namespace TuyenPham.Base.Helpers
 {
-    public static class ProcessExtensions
+    public static class ProcessHelper
     {
         public static int RunAsync(
             string fileName,

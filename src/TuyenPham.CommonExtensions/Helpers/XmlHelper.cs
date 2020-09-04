@@ -3,9 +3,9 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace TuyenPham.Base.Extensions
+namespace TuyenPham.Base.Helpers
 {
-    public static class XmlExtensions
+    public static class XmlHelper
     {
         public static void Save(
             this XmlDocument xDoc,

@@ -1,12 +1,12 @@
-﻿namespace TuyenPham.Base.Extensions
+﻿namespace TuyenPham.Base.Helpers
 {
-    public static class GitExtensions
+    public static class GitHelper
     {
         public static bool Reset(string repoFolder, bool hard)
         {
             var opts = hard ? "--hard" : "";
 
-            var gitCloneStatusCode = ProcessExtensions.RunAsync(
+            var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
                 $@"reset {opts}",
                 repoFolder);
@@ -16,7 +16,7 @@
 
         public static bool Checkout(string repoFolder, string branch)
         {
-            var gitCloneStatusCode = ProcessExtensions.RunAsync(
+            var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
                 $@"checkout {branch}",
                 repoFolder);
@@ -26,7 +26,7 @@
 
         public static bool Clean(string repoFolder)
         {
-            var gitCloneStatusCode = ProcessExtensions.RunAsync(
+            var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
                 $@"clean",
                 repoFolder);
@@ -36,7 +36,7 @@
 
         public static bool Pull(string repoFolder)
         {
-            var gitCloneStatusCode = ProcessExtensions.RunAsync(
+            var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
                 $@"pull",
                 repoFolder);

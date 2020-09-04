@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TuyenPham.Base.Extensions
+namespace TuyenPham.Base.Helpers
 {
-    public static class IoExtensions
+    public static class IoHelper
     {
         public static FileInfo GetFile(this DirectoryInfo di, params string[] fileParts)
         {
@@ -27,15 +27,15 @@ namespace TuyenPham.Base.Extensions
             if (deleteFirst)
                 await DeleteFolderAsync(destinationFolder);
 
-            ConsoleExtensions.Yellow($"Copy '{sourceFolder}' to '{destinationFolder}'");
+            ConsoleHelper.Yellow($"Copy '{sourceFolder}' to '{destinationFolder}'");
 
-            var result = ProcessExtensions.RunAsync(
+            var result = ProcessHelper.RunAsync(
                 "robocopy",
                 $@"""{sourceFolder}"" ""{destinationFolder}"" /e /NFL /NDL /NJH",
                 sourceFolder);
 
             if (result == 1)
-                ConsoleExtensions.Green("Copied successfully.");
+                ConsoleHelper.Green("Copied successfully.");
 
             else
                 throw new Exception($"Copy failed with code {result}.");
@@ -47,7 +47,7 @@ namespace TuyenPham.Base.Extensions
         {
             do
             {
-                ConsoleExtensions.Yellow($"Deleting '{folderPath}'...");
+                ConsoleHelper.Yellow($"Deleting '{folderPath}'...");
 
                 try
                 {
@@ -55,14 +55,14 @@ namespace TuyenPham.Base.Extensions
                 }
                 catch
                 {
-                    ConsoleExtensions.Yellow(
+                    ConsoleHelper.Yellow(
                         $"Can not delete '{folderPath}'. Press 'Enter' to try again or delete it manually then come back here.");
 
                     Console.ReadKey();
                 }
             } while (Directory.Exists(folderPath));
 
-            ConsoleExtensions.Green("Deleted.");
+            ConsoleHelper.Green("Deleted.");
 
             Console.WriteLine();
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TuyenPham.Base.Interfaces;
 
-namespace TuyenPham.Base.Extensions
+namespace TuyenPham.Base.Helpers
 {
-    public static class ConsoleExtensions
+    public static class ConsoleHelper
     {
         public static T PromptSelectItem<T>(IList<T> items, string selectedItem, string question)
                where T : class, IHasName
@@ -16,7 +16,8 @@ namespace TuyenPham.Base.Extensions
             {
                 var availableItemNames = items
                     .Select(i => i.Name)
-                    .OrderBy(i => i).Join();
+                    .OrderBy(i => i)
+                    .Join();
 
                 Console.Write($"{question} ({availableItemNames}): ");
 
