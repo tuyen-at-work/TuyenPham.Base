@@ -2,43 +2,45 @@
 {
     public static class GitHelper
     {
-        public static bool Reset(string repoFolder, bool hard)
+        public static bool Reset(string repoFolder, bool hard, string extraArgs = null)
         {
             var opts = hard ? "--hard" : "";
 
             var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
-                $@"reset {opts}",
+                $@"reset {opts} {extraArgs}",
                 repoFolder);
 
             return gitCloneStatusCode == 0;
         }
 
-        public static bool Checkout(string repoFolder, string branch)
+        public static bool Checkout(string repoFolder, string branch, string extraArgs = null)
         {
             var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
-                $@"checkout {branch}",
+                $@"checkout {branch} {extraArgs}",
                 repoFolder);
 
             return gitCloneStatusCode == 0;
         }
 
-        public static bool Clean(string repoFolder)
+        public static bool Clean(string repoFolder, bool hard = true, string extraArgs = null)
         {
+            var opts = hard ? "-f -d" : "";
+
             var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
-                $@"clean",
+                $@"clean {opts} {extraArgs}",
                 repoFolder);
 
             return gitCloneStatusCode == 0;
         }
 
-        public static bool Pull(string repoFolder)
+        public static bool Pull(string repoFolder, string extraArgs = null)
         {
             var gitCloneStatusCode = ProcessHelper.RunAsync(
                 $@"git",
-                $@"pull",
+                $@"pull {extraArgs}",
                 repoFolder);
 
             return gitCloneStatusCode == 0;

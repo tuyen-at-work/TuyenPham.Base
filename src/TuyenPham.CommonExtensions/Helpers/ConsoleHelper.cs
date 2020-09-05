@@ -54,20 +54,11 @@ namespace TuyenPham.Base.Helpers
             return output;
         }
 
-        public static void Yellow(object message, bool newLine = true)
-        {
-            Color(message, ConsoleColor.Yellow, newLine);
-        }
+        public static void Yellow(object message, bool newLine = true) => Color(message, ConsoleColor.Yellow, newLine);
 
-        public static void Green(object message, bool newLine = true)
-        {
-            Color(message, ConsoleColor.Green, newLine);
-        }
+        public static void Green(object message, bool newLine = true) => Color(message, ConsoleColor.Green, newLine);
 
-        public static void Red(object message, bool newLine = true)
-        {
-            Color(message, ConsoleColor.Red, newLine);
-        }
+        public static void Red(object message, bool newLine = true) => Color(message, ConsoleColor.Red, newLine);
 
         private static void Color(object message, ConsoleColor color, bool newLine)
         {
