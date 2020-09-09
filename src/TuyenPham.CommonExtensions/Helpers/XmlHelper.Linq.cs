@@ -91,6 +91,11 @@ namespace TuyenPham.Base.Helpers
             return node;
         }
 
+        public static void SetText(this XElement element, string text)
+        {
+            element.SetValue(text);
+        }
+
         public static XElement AppendTo(this XElement node, XElement parentNode)
         {
             parentNode.Add(node);

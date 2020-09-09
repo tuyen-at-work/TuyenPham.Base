@@ -62,13 +62,18 @@ namespace TuyenPham.Base.Helpers
         {
             var xDoc = parent.OwnerDocument;
 
-            if (xDoc == null)
-                throw new ArgumentNullException(nameof(parent.OwnerDocument));
-
-            var node = xDoc.CreateNode(XmlNodeType.Element, name, xDoc.NamespaceURI) as XmlElement;
+            var node = xDoc!.CreateNode(XmlNodeType.Element, name, xDoc.NamespaceURI) as XmlElement;
             parent.AppendChild(node!);
 
             return node;
+        }
+
+        public static void SetText(this XmlElement element, string text)
+        {
+            var xDoc = element.OwnerDocument;
+
+            var node = xDoc!.CreateTextNode(text);
+            element.AppendChild(node);
         }
 
         public static XmlElement AppendTo(
