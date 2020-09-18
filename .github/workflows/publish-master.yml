@@ -57,8 +57,8 @@ jobs:
         # Format of the git tag, [*] gets replaced with actual version
         # TAG_FORMAT: # optional, default is v*
         # API key to authenticate with NuGet server
-        NUGET_KEY: ${{ secrets.NUGET_PACKAGE_PUSH_TOKEN }} # optional
+        NUGET_KEY: ${{ secrets.EXTERNAL_NUGET_PUSH_TOKEN }} # optional
         # NuGet server uri hosting the packages, defaults to https://api.nuget.org
-        NUGET_SOURCE: "https://nuget.pkg.github.com/tuyen-at-work/index.json" # optional, default is https://api.nuget.org
+        # NUGET_SOURCE: "https://nuget.pkg.github.com/tuyen-at-work/index.json" # optional, default is https://api.nuget.org
         # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
         INCLUDE_SYMBOLS: true # optional
