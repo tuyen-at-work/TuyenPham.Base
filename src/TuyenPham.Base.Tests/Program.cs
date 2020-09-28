@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using TuyenPham.Base.Helpers;
 
 namespace TuyenPham.Base.Tests
@@ -8,11 +7,9 @@ namespace TuyenPham.Base.Tests
     {
         internal static void Main(string[] args)
         {
-            var di = new DirectoryInfo("E:/test");
-            var diList = di.GetDirectories("Items*");
-            diList.DeleteAll();
-
-            Console.WriteLine("Hello World!");
+            new DirectoryInfo("E:/test")
+                .FilterFolders("Item*")
+                ?.DeleteAll();
         }
     }
 }

@@ -5,13 +5,13 @@ namespace TuyenPham.Base.Helpers
 {
     public static partial class WebConfigHelper
     {
-        public static void FixProxy(this XDocument xDoc)
+        public static void SetProxy(this XDocument xDoc, string endpoint)
         {
             xDoc.XPathSelectElement("/configuration/system.net")
-                .GetOrCreateElement("defaultProxy")
-                .GetOrCreateElement("proxy")
-                .SetAttribute("proxyaddress", "http://localhost:8888")
-                .SetAttribute("bypassonlocal", "True");
+                ?.GetOrCreateElement("defaultProxy")
+                ?.GetOrCreateElement("proxy")
+                ?.SetAttribute("proxyaddress", endpoint)
+                ?.SetAttribute("bypassonlocal", "True");
         }
     }
 }
