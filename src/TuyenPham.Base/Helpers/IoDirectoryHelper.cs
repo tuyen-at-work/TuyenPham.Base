@@ -20,6 +20,22 @@ namespace TuyenPham.Base.Helpers
             return new DirectoryInfo(Path.Combine(di.FullName, path));
         }
 
+        public static IEnumerable<FileInfo> FilterFiles(
+            this DirectoryInfo di,
+            string pattern,
+            SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            return di.Exists ? di.EnumerateFiles(pattern, searchOption) : null;
+        }
+
+        public static IEnumerable<DirectoryInfo> FilterFolders(
+        this DirectoryInfo di,
+        string pattern,
+        SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            return di.Exists ? di.EnumerateDirectories(pattern, searchOption) : null;
+        }
+
         public static async Task CopyDirectoryAsync(
             string sourceFolder,
             string destinationFolder,
