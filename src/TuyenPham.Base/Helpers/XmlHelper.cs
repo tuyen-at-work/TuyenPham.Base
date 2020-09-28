@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Xml;
 
 namespace TuyenPham.Base.Helpers
@@ -66,6 +65,11 @@ namespace TuyenPham.Base.Helpers
             parent.AppendChild(node!);
 
             return node;
+        }
+
+        public static XmlElement GetOrCreateElement(this XmlElement parent, string name)
+        {
+            throw new NotImplementedException();
         }
 
         public static void SetText(this XmlElement element, string text)

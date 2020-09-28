@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -89,6 +91,33 @@ namespace TuyenPham.Base.Helpers
             parent.Add(node!);
 
             return node;
+        }
+
+        public static XElement GetOrCreateElement(
+            this XElement parent,
+            string name,
+            params KeyValuePair<string, string>[] attributes)
+        {
+            var element = parent
+                .Elements(name)
+                .FirstOrDefault(e => attributes.All(a => e.Attribute(a.Key)?.Value == a.Value));
+
+            if (element == null)
+            {
+                element = parent.AddElement(name);
+
+                foreach (var (k, v) in attributes)
+                    element.SetAttribute(k, v);
+            }
+
+            return element;
+        }
+
+        public static XElement RemoveChildren(this XElement parent)
+        {
+            parent.RemoveNodes();
+
+            return parent;
         }
 
         public static void SetText(this XElement element, string text)
