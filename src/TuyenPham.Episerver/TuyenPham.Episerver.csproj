@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TuyenPham.Base" Version="1.0.16" />
+    <PackageReference Include="TuyenPham.Base" Version="1.0.17" />
   </ItemGroup>
 
 </Project>
