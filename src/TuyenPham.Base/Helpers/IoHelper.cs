@@ -1,48 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace TuyenPham.Base.Helpers
 {
     public static class IoHelper
     {
-        public static FileInfo GetFile(this DirectoryInfo di, params string[] fileParts)
-        {
-            var path = fileParts.Aggregate(di.FullName, Path.Combine);
-            return new FileInfo(Path.Combine(di.FullName, path));
-        }
-
-        public static DirectoryInfo GetFolder(this DirectoryInfo di, params string[] folderParts)
-        {
-            var path = folderParts.Aggregate(di.FullName, Path.Combine);
-            return new DirectoryInfo(Path.Combine(di.FullName, path));
-        }
-
-        public static async Task CopyDirectoryAsync(
-            string sourceFolder,
-            string destinationFolder,
-            bool deleteFirst)
-        {
-            if (deleteFirst)
-                await DeleteFolderAsync(destinationFolder);
-
-            ConsoleHelper.Yellow($"Copy '{sourceFolder}' to '{destinationFolder}'");
-
-            var result = ProcessHelper.RunAsync(
-                "robocopy",
-                $@"""{sourceFolder}"" ""{destinationFolder}"" /e /NFL /NDL /NJH",
-                sourceFolder);
-
-            if (result == 1)
-                ConsoleHelper.Green("Copied successfully.");
-
-            else
-                throw new Exception($"Copy failed with code {result}.");
-
-            Console.WriteLine();
-        }
-
         public static async Task DeleteFolderAsync(string folderPath)
         {
             do

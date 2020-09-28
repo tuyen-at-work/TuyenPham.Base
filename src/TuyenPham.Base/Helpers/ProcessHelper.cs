@@ -10,16 +10,19 @@
 
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace TuyenPham.Base.Helpers
 {
     public static class ProcessHelper
     {
-        public static int RunAsync(
+        public static Task<int> RunAsync(
             string fileName,
             string command,
             string workingFolder)
         {
+            var tcs = new TaskCompletionSource<int>();
+
             var currentDirectory = Directory.GetCurrentDirectory();
 
             Directory.CreateDirectory(workingFolder);
@@ -27,7 +30,7 @@ namespace TuyenPham.Base.Helpers
 
             try
             {
-                using var cmd = new Process
+                using var process = new Process
                 {
                     StartInfo =
                     {
@@ -36,17 +39,15 @@ namespace TuyenPham.Base.Helpers
                         WorkingDirectory = workingFolder
                     }
                 };
-                cmd.Start();
-                cmd.WaitForExit();
 
-                Directory.SetCurrentDirectory(currentDirectory);
+                process.Exited += (sender, args) =>
+                {
+                    tcs.SetResult(process.ExitCode);
+                    process.Dispose();
+                };
 
-                return cmd.ExitCode;
-            }
-            catch
-            {
-                Directory.SetCurrentDirectory(currentDirectory);
-                throw;
+                process.Start();
+                return tcs.Task;
             }
             finally
             {
