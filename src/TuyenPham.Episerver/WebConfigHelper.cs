@@ -4,18 +4,23 @@ using TuyenPham.Base.Helpers;
 
 namespace TuyenPham.Episerver
 {
-    public static partial class ConfigHelper
+    public static partial class WebConfigHelper
     {
         public static XElement SetEpiserverFind(
             this XDocument xDoc,
             string serviceUrl,
             string defaultIndex)
         {
-            var episerverFind = xDoc.XPathSelectElement("/configuration/episerver.find")
+            return xDoc.XPathSelectElement("/configuration/episerver.find")
                 ?.SetAttribute("serviceUrl", serviceUrl)
                 ?.SetAttribute("defaultIndex", defaultIndex);
+        }
 
-            return episerverFind;
+        public static void DisableErrorHandler(this XDocument xDoc)
+        {
+            xDoc
+                .XPathSelectElement("/configuration/system.webServer/httpErrors")
+                ?.Remove();
         }
     }
 }

@@ -5,7 +5,7 @@ using TuyenPham.Base.Helpers;
 
 namespace TuyenPham.Episerver
 {
-    public static partial class ConfigHelper
+    public static partial class WebConfigHelper
     {
         public static XElement GetBlobProvidersElement(this XDocument xDoc)
         {
@@ -38,7 +38,7 @@ namespace TuyenPham.Episerver
             return element;
         }
 
-        public static XElement AddFileBlob(
+        public static XElement AddOrUpdateFileBlob(
             this XElement element,
             string name,
             string path)
