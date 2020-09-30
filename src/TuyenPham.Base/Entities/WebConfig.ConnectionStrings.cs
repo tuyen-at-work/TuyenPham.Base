@@ -1,22 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
-using System.Xml.XPath;
+using TuyenPham.Base.Helpers;
 
-namespace TuyenPham.Base.Helpers
+namespace TuyenPham.Base.Entities
 {
-    public static partial class WebConfigHelper
+    public partial class WebConfig
     {
-        public static XDocument SetConnectionString(
-            this XDocument xDoc,
+        public WebConfig SetConnectionString(
             string name,
             string connectionString,
             params KeyValuePair<string, string>[] attributes)
         {
-            var connectionStrings = xDoc.XPathSelectElement("/configuration/connectionStrings");
-            if (connectionStrings == null)
-                return xDoc;
+            if (ConnectionStrings == null)
+                return this;
 
-            var conn = connectionStrings
+            var conn = ConnectionStrings
                 .GetOrCreateElement(
                     "add",
                     new KeyValuePair<string, string>("name", name));
@@ -26,24 +23,20 @@ namespace TuyenPham.Base.Helpers
             foreach (var (k, v) in attributes)
                 conn.SetAttribute(k, v);
 
-            return xDoc;
+            return this;
         }
 
-        public static XDocument SetSqlConnectionString(
-            this XDocument xDoc,
+        public WebConfig SetSqlConnectionString(
             string name,
             string connectionString)
         {
-            xDoc.SetConnectionString(
+            return SetConnectionString(
                 name,
                 connectionString,
                 new KeyValuePair<string, string>("providerName", "System.Data.SqlClient"));
-
-            return xDoc;
         }
 
-        public static XDocument SetSqlConnectionString(
-            this XDocument xDoc,
+        public WebConfig SetSqlConnectionString(
             string name,
             string dataSource,
             string initialCatalog,
@@ -53,28 +46,22 @@ namespace TuyenPham.Base.Helpers
             var connectionString =
                 $"Data Source={dataSource};Initial Catalog={initialCatalog};Connection Timeout=60;Integrated Security=false;User Id={userId};Password={password};MultipleActiveResultSets=True";
 
-            xDoc.SetConnectionString(
+            return SetConnectionString(
                 name,
                 connectionString,
                 new KeyValuePair<string, string>("providerName", "System.Data.SqlClient"));
-
-            return xDoc;
         }
 
-        public static XDocument SetAzureBlobConnectionString(
-            this XDocument xDoc,
+        public WebConfig SetAzureBlobConnectionString(
             string name,
             string connectionString)
         {
-            xDoc.SetConnectionString(
+            return SetConnectionString(
                 name,
                 connectionString);
-
-            return xDoc;
         }
 
-        public static XDocument SetAzureBlobConnectionString(
-            this XDocument xDoc,
+        public WebConfig SetAzureBlobConnectionString(
             string name,
             string accountName,
             string accountKey,
@@ -83,11 +70,9 @@ namespace TuyenPham.Base.Helpers
         {
             var connectionString = $"AccountName={accountName};AccountKey={accountKey};DefaultEndpointsProtocol={defaultEndpointsProtocol};EndpointSuffix={endpointSuffix};";
 
-            xDoc.SetConnectionString(
+            return SetConnectionString(
                 name,
                 connectionString);
-
-            return xDoc;
         }
     }
 }
