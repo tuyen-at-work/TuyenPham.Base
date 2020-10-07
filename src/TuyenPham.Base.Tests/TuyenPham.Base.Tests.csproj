@@ -3,7 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <LangVersion>8.0</LangVersion>
+    <Version>1.0.0</Version>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Tuyen Pham</Authors>
+    <RepositoryUrl>https://github.com/tuyen-at-work/TuyenPham.CommonExtensions.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
 
   <ItemGroup>

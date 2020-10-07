@@ -3,8 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Tuyen Pham</Authors>
+    <RepositoryUrl>https://github.com/tuyen-at-work/TuyenPham.CommonExtensions.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType> 
   </PropertyGroup>
 
   <ItemGroup>
