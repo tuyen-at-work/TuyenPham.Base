@@ -26,7 +26,19 @@ namespace TuyenPham.Build.Helpers
             return await repository.GetResourceAsync<FindPackageByIdResource>();
         }
 
-        public static async Task<IList<NuGetVersion>> GetAllVersionsAsync(this FindPackageByIdResource resource, string packageId, int? limit = null)
+        /// <summary>
+        /// Get all versions of a nuget package, sort by version in descending order
+        /// </summary>
+        /// <param name="resource">Resource</param>
+        /// <param name="packageId">Package ID</param>
+        /// <param name="includePrerelease">Include Prerelease</param>
+        /// <param name="limit">Limit</param>
+        /// <returns></returns>
+        public static async Task<IList<NuGetVersion>> GetAllVersionsAsync(
+            this FindPackageByIdResource resource,
+            string packageId,
+            bool includePrerelease = false,
+            int? limit = null)
         {
             var logger = NullLogger.Instance;
             var cancellationToken = CancellationToken.None;
@@ -42,14 +54,15 @@ namespace TuyenPham.Build.Helpers
                 logger,
                 cancellationToken);
 
-            IEnumerable<NuGetVersion> filteredVersions = versions
-                .Where(v => !v.IsPrerelease)
-                .OrderByDescending(v => v.Version);
+            if (!includePrerelease)
+                versions = versions.Where(v => !v.IsPrerelease);
+
+            versions = versions.OrderByDescending(v => v.Version);
 
             if (limit.HasValue)
-                filteredVersions = filteredVersions.Take(limit.Value);
+                versions = versions.Take(limit.Value);
 
-            return filteredVersions
+            return versions
                 .ToList();
         }
     }
