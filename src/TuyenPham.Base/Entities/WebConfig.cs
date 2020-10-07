@@ -10,11 +10,11 @@ namespace TuyenPham.Base.Entities
 {
     public partial class WebConfig
     {
-        private readonly FileInfo _webConfigFile;
-        private readonly XDocument _xDoc;
+        private FileInfo FileInfo { get; }
+        public XDocument XDocument { get; }
         private readonly string _originalXml;
 
-        public XElement ConnectionStrings => _xDoc.XPathSelectElement("/configuration/connectionStrings");
+        public XElement ConnectionStrings => XDocument.XPathSelectElement("/configuration/connectionStrings");
 
         private static readonly XmlWriterSettings _xmlWriterSettings = new XmlWriterSettings
         {
@@ -23,28 +23,28 @@ namespace TuyenPham.Base.Entities
             IndentChars = "  "
         };
 
-        private WebConfig(FileInfo webConfigFile, XDocument xDoc)
+        private WebConfig(FileInfo fileInfo, XDocument xDocument)
         {
-            _webConfigFile = webConfigFile;
-            _xDoc = xDoc;
+            XDocument = xDocument;
+            FileInfo = fileInfo;
 
-            _originalXml = xDoc.GetString(_xmlWriterSettings);
+            _originalXml = xDocument.GetString(_xmlWriterSettings);
         }
 
-        public bool IsDirty => !_xDoc.GetString(_xmlWriterSettings).Equals(_originalXml);
+        public bool IsDirty => !XDocument.GetString(_xmlWriterSettings).Equals(_originalXml);
 
         public async Task SaveIfDirtyAsync()
         {
             if (!IsDirty)
                 return;
 
-            var xmlBytes = _xDoc.GetBytes(_xmlWriterSettings);
-            await File.WriteAllBytesAsync(_webConfigFile.FullName, xmlBytes);
+            var xmlBytes = XDocument.GetBytes(_xmlWriterSettings);
+            await File.WriteAllBytesAsync(FileInfo.FullName, xmlBytes);
         }
 
         public WebConfig SetProxy(string endpoint)
         {
-            _xDoc.XPathSelectElement("/configuration/system.net")
+            XDocument.XPathSelectElement("/configuration/system.net")
                 ?.GetOrCreateElement("defaultProxy")
                 ?.GetOrCreateElement("proxy")
                 ?.SetAttribute("proxyaddress", endpoint)
