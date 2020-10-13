@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TuyenPham.Episerver", "Tuye
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuyenPham.Build", "TuyenPham.Build\TuyenPham.Build.csproj", "{32D5B38D-2C92-4EAA-8FF0-BB5F3084E91E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuyenPham.ConsoleEx", "TuyenPham.ConsoleEx\TuyenPham.ConsoleEx.csproj", "{30627A4F-9D9D-4363-B6B9-995FAE6FFEE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{32D5B38D-2C92-4EAA-8FF0-BB5F3084E91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32D5B38D-2C92-4EAA-8FF0-BB5F3084E91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32D5B38D-2C92-4EAA-8FF0-BB5F3084E91E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30627A4F-9D9D-4363-B6B9-995FAE6FFEE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30627A4F-9D9D-4363-B6B9-995FAE6FFEE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30627A4F-9D9D-4363-B6B9-995FAE6FFEE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30627A4F-9D9D-4363-B6B9-995FAE6FFEE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

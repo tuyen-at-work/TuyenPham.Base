@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TuyenPham.Base.Helpers;
 using TuyenPham.Base.Interfaces;
 
-namespace TuyenPham.Base.Helpers
+namespace TuyenPham.ConsoleEx.Helpers
 {
     public static class ConsoleHelper
     {

@@ -44,7 +44,7 @@ namespace TuyenPham.Base.Entities
 
         public WebConfig SetProxy(string endpoint)
         {
-            XDocument.XPathSelectElement("/configuration")
+            XDocument.Root
                 ?.GetOrCreateElement("system.net")
                 ?.GetOrCreateElement("defaultProxy")
                 ?.GetOrCreateElement("proxy")

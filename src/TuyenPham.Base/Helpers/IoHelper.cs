@@ -6,29 +6,29 @@ namespace TuyenPham.Base.Helpers
 {
     public static class IoHelper
     {
-        public static async Task DeleteFolderAsync(string folderPath)
-        {
-            do
-            {
-                ConsoleHelper.Yellow($"Deleting '{folderPath}'...");
+        //public static async Task DeleteFolderAsync(string folderPath)
+        //{
+        //    do
+        //    {
+        //        ConsoleHelper.Yellow($"Deleting '{folderPath}'...");
 
-                try
-                {
-                    await DeleteFolderInternalAsync(folderPath);
-                }
-                catch
-                {
-                    ConsoleHelper.Yellow(
-                        $"Can not delete '{folderPath}'. Press 'Enter' to try again or delete it manually then come back here.");
+        //        try
+        //        {
+        //            await DeleteFolderInternalAsync(folderPath);
+        //        }
+        //        catch
+        //        {
+        //            ConsoleHelper.Yellow(
+        //                $"Can not delete '{folderPath}'. Press 'Enter' to try again or delete it manually then come back here.");
 
-                    Console.ReadKey();
-                }
-            } while (Directory.Exists(folderPath));
+        //            Console.ReadKey();
+        //        }
+        //    } while (Directory.Exists(folderPath));
 
-            ConsoleHelper.Green("Deleted.");
+        //    ConsoleHelper.Green("Deleted.");
 
-            Console.WriteLine();
-        }
+        //    Console.WriteLine();
+        //}
 
         private static async Task DeleteFolderInternalAsync(string folderPath)
         {
