@@ -23,6 +23,7 @@ namespace TuyenPham.Episerver
         public static XElement AddOrUpdateAzureBlob(
             this XElement element,
             string name,
+            string connectionName,
             string container)
         {
             var child = element
@@ -32,7 +33,7 @@ namespace TuyenPham.Episerver
             child
                 .SetAttribute("name", name)
                 .SetAttribute("type", "EPiServer.Azure.Blobs.AzureBlobProvider,EPiServer.Azure")
-                .SetAttribute("connectionStringName", "EPiServerAzureBlobs")
+                .SetAttribute("connectionStringName", connectionName)
                 .SetAttribute("container", container);
 
             return element;
